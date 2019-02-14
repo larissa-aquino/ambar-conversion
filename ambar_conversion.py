@@ -27,6 +27,13 @@ class conversion:
         self.taf['TUSD_B_220'] = self.tusd_b * 0.9
         self.taf['TE_B_>220'] = self.te
         self.taf['TUSD_B_>220'] = self.tusd_b
+        
+    def projection( self, kwh_c, kwh_g, tarifa, B_verde, B_amarela, B_vermelha, entrada):
+        avg_c = np.average(kwh_c)
+        avg_g = np.average(kwh_g)
+        proj = self.conversion('tarifa', avg_c, avg_g, B_verde, B_amarela, B_vermelha, entrada)
+
+        return proj
 
     def conversion( self, renda, kwh_consumido, kwh_injetado, bverde, bamarela, bvermelha, entrada):
         value1 = self.conv(renda, kwh_consumido, kwh_injetado, bverde, bamarela, bvermelha)
